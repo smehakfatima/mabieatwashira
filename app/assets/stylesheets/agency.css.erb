@@ -152,7 +152,7 @@ a.active, a:active, a:focus, a:hover {
         font-size: 1.5em;
     }
 }header {
-     background-image: url('/assets/header-bg.jpg');
+     background-image: url('<%= asset_path('header-bg.jpg')%>');
      background-repeat: no-repeat;
      background-attachment: scroll;
      background-position: center center;
@@ -471,7 +471,8 @@ aside.clients img {
 }
 section#contact {
     background-color: #222;
-    background-image: url('/assets/map-image.png');
+    background-image: url('<%= asset_path('map-image.png')%>');
+    )
     background-position: center;
     background-repeat: no-repeat;
 }
