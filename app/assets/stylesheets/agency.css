@@ -128,12 +128,12 @@ a.active, a:active, a:focus, a:hover {
 }
 @media (min-width:768px) {
     .navbar-custom {
-        background-color: transparent;
+        background-color: transparent !important;
         padding: 25px 0;
         -webkit-transition: padding .3s;
         -moz-transition: padding .3s;
         transition: padding .3s;
-        border: none;
+        border: none !important;
     }
     .navbar-custom .navbar-brand {
         font-size: 2em;
@@ -145,7 +145,7 @@ a.active, a:active, a:focus, a:hover {
         border-radius: 3px;
     }
     .navbar-custom.affix {
-        background-color: #222;
+        background-color: #222 !important;
         padding: 10px 0;
     }
     .navbar-custom.affix .navbar-brand {
