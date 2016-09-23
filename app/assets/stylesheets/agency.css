@@ -126,6 +126,26 @@ a.active, a:active, a:focus, a:hover {
     color: #fff !important;
     background-color: #fec503 !important;
 }
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+
+    display: flex;
+    align-items: center;
+    background-color: black;
+}
+
+.login{
+    background-color: #fed136 !important;
+    color: white !important;
+}
+.login-box{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+/*media querries started*/
 @media (min-width:768px) {
     .navbar-custom {
         background-color: transparent !important;
