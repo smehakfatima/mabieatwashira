@@ -94,11 +94,11 @@ RailsAdmin.config do |config|
     field :in_stock
     field :deleted_at
     create do
-      exclude_fields :deleted_at, :in_stock
+      exclude_fields :deleted_at
     end
-    update do
-      exclude_fields :in_stock
-    end
+    # update do
+    #   exclude_fields :in_stock
+    # end
     list do
       exclude_fields :description
     end
