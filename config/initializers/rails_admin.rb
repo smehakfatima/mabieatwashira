@@ -52,7 +52,9 @@ RailsAdmin.config do |config|
     field :created_at do
       label "Ordered At"
     end
-    field :deleted_at
+    field :deleted_at do
+      help 'To delete this record set the date here'
+    end
     field :comments ,  :text do
       html_attributes do
         {:rows=> 3, :cols => 50}
@@ -92,7 +94,9 @@ RailsAdmin.config do |config|
     end
     field :price
     field :in_stock
-    field :deleted_at
+    field :deleted_at  do
+      help 'To delete this record set the date here'
+    end
     create do
       exclude_fields :deleted_at
     end
