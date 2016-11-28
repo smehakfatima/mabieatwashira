@@ -1,10 +1,13 @@
 class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :product
+  belongs_to :dealer
 
   validates_presence_of :user, :product, :price, :quantity, :order_type
 
   validate :update_quantity
+
+  attr_accessor :total_price
 
   TYPES = [:purchased, :sold]
   enum order_type: TYPES
@@ -16,7 +19,6 @@ class Order < ActiveRecord::Base
       super value
     end
   end
-
   def order_type_enum
     TYPES.each_with_index.to_a
   end
@@ -26,11 +28,17 @@ class Order < ActiveRecord::Base
     product =  self.product
 
     if self.order_type == "purchased" #selling orders
-      product.in_stock = product.in_stock + self.quantity
-      product.save!
+      if self.dealer.present?
+        product.in_stock = product.in_stock + self.quantity
+        product.save!
+      else
+        errors.add(:dealer, "Dealer is required")
+        error = true
+      end
+
     else
       if product.in_stock - self.quantity < 0
-        errors.add(:quantity, "you entetered is less than in stock")
+        errors.add(:quantity, "you entered is less than in stock")
         error = true
       else
         product.in_stock = product.in_stock - self.quantity
@@ -39,4 +47,5 @@ class Order < ActiveRecord::Base
     end
 
   end
+
 end

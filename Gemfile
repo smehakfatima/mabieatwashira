@@ -32,7 +32,7 @@ gem 'devise-bootstrap-views', '~> 0.0.8'
 gem "rails_admin"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'bootstrap-datepicker-rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

@@ -1,0 +1,124 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button class="navbar-toggle collapsed" data-target="#secondary-navigation" data-toggle="collapse" type="button">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/admin">
+          Hussain Group <small>Admin</small>
+        </a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right root_links">
+          <li><a href="/">Home</a></li>
+          <li class="dashboard_root_link"><a href="/admin/">Admin</a></li>
+          <li><a><%= current_user.name %></a></li>
+          <li><a rel="nofollow" data-method="delete" href="/users/sign_out"><span class="label label-danger">Log out</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="row searchTop" role="search">
+          <br>
+          <div class="form-group col-md-5">
+
+            <label class="col-sm-4 control-label">Date</label>
+            <div class="col-sm-8">
+              <input type="text" data-provide='datepicker' id="order_date" class="form-control" placeholder="MM/DD/YYYY">
+            </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label class="col-sm-4 control-label">Order Type</label>
+            <div class="col-sm-8">
+              <select class="form-control" id="skip_id">
+                <option  value="">All</option>
+                <option  value="true">Purchased</option>
+                <option  value="false">Sold</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <div class="col-sm-6">
+              <button class="btn btn-primary" id="search">Search</button>
+            </div>
+            <div class="col-sm-6">
+              <button class="btn btn-primary" id="reset">Clear</button>
+            </div>
+          </div>
+          <!--<div class="form-group col-md-3">-->
+            <!--<div class="col-sm-offset-2 col-sm-10">-->
+              <!--<a class="btn searchBtn" id="exportbtn" href="/export.xls">Export To Excel</a>-->
+              <!--&lt;!&ndash; <%#= link_to "Export To Excel", export_path(month: @month,format: "xls"), class: 'btn searchBtn', :id => 'save_search' %> &ndash;&gt;-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+    <div id="summary">
+    </div>
+  </div>
+</div>
+<div class="loader"></div>
+<script type="text/javascript">
+  $(document).on({
+
+    ajaxStart: function() {
+      $("body").addClass("loading");
+    },
+    ajaxStop: function() {
+      $("body").removeClass("loading");
+    }
+  });
+
+  $(document).ready(function() {
+//    $.ajax({
+//      url: "/def order_summary",
+//      method: "GET",
+//      success: function(data) {
+//      },
+//      complete: function(){
+//      }
+//    });
+    $('#search').click(function(event){
+
+      var date = $('#order_date').datepicker().val();
+      date = date.replace("/", ",");
+      date = date.replace("/", ",");
+      $.ajax({
+        url: "/search",
+        method: "GET",
+        data: {"date": date },
+        success: function(data) {
+          //$("#skip").html(strVar);
+        },
+        complete: function(){
+        }
+      });
+      event.preventDefault(); // Prevent link from following its href
+    });
+
+    $('#reset').click(function(event){
+      $('#order_date').datepicker("clearDates");
+      $.ajax({
+        url: link,
+        method: "GET",
+        data: {"date": nil},
+        success: function(data) {
+        },
+        complete: function(){
+
+        }
+      });
+      event.preventDefault(); // Prevent link from following its href
+    });
+  });
+
+</script>

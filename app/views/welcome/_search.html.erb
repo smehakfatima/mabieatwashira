@@ -1,0 +1,63 @@
+<div class="table-responsive">
+  <table class="table table-stripedtable table-bordered">
+    <thead>
+      <!--<tr>-->
+        <!--<th>#</th>-->
+        <!--<th>Name</th>-->
+        <!--<th>Email</th>-->
+        <!--<th>Address</th>-->
+        <!--<th>Phone</th>-->
+        <!--<th>Quantity</th>-->
+        <!--<th>Status</th>-->
+        <!--<th>Registrated On</th>-->
+        <!--<th>Month</th>-->
+      <!--</tr>-->
+    </thead>
+    <tbody>
+      <%- if @summary and @summary.length>0%>
+      <%# @summary.each_with_index do |subscription, index| %>
+        <tr>
+          <td>Total Number of Orders</td>
+          <td><%= @summary.length %></td>
+        </tr>
+        <tr>
+          <td>Total Number of Purchased Orders</td>
+          <td><%= @summary.where(:order_type=> 0).count || 0 %></td>
+        </tr>
+        <tr>
+          <td>Total Number of Sold Orders</td>
+          <td><%= @summary.where(:order_type=> 1).count || 0 %></td>
+        </tr>
+        <tr>
+          <td>Total Out Going Payments</td>
+          <td><%= @summary.where(:order_type=> 0).pluck(:price).inject(0){|sum,item| sum + item}%> AED</td>
+        </tr>
+        <tr>
+          <td>Total Receiving Payments</td>
+          <td><%= @summary.where(:order_type=> 1).pluck(:price).inject(0){|sum,item| sum + item}%> AED</td>
+        </tr>
+          <!--<td><%#=subscription.user.name %></td>-->
+          <!--<td><%#=subscription.user.email %></td>-->
+          <!--<td><%#=subscription.user.address %></td>-->
+          <!--<td><%#=subscription.user.phone %></td>-->
+          <!--<td><%#=subscription.quantity %></td>-->
+          <!--<td><%#=subscription.skip %></td>-->
+          <!--<td><%#=subscription.user.updated_at.try(:strftime ,"%m/%d/%Y") %></td>-->
+          <!--<td><%#=subscription.box.slug%></td>-->
+        <!--</tr>-->
+      <%-# end %>
+      <%- else%>
+          <tr>
+            <td colspan="9" class="text-center">No Data Available</td>
+          </tr>
+      <%-end%>
+    </tbody>
+  </table>
+ </div>
+    <nav>
+        <ul class="pagination pull-right">
+            <%if @subscriptions.present?%>
+              <%= js_will_paginate @subscriptions %>
+            <%end%>
+        </ul>
+    </nav>

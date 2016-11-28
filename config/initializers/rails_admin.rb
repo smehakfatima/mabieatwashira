@@ -16,6 +16,9 @@ RailsAdmin.config do |config|
   ## == Cancan ==
    config.authorize_with :cancan  #TODO add cancancan to rails_admin config
 
+  config.navigation_static_links = {
+      'Reports' => 'https://hussaingroupofcompanies.herokuapp.com/summary'
+  }
 
   ## == Pundit ==
   # config.authorize_with :pundit
@@ -40,13 +43,65 @@ RailsAdmin.config do |config|
       inline_add false
       inline_edit false
     end
+    field :dealer do
+      inline_add false
+      inline_edit false
+    end
     field :quantity
     field :price
+    field :created_at do
+      label "Ordered At"
+    end
     field :deleted_at
+    field :comments ,  :text do
+      html_attributes do
+        {:rows=> 3, :cols => 50}
+      end
+    end
+    # export do
+    #   field :order_type
+    #   field :product , :string do
+    #     export_value do
+    #       value.name if value #value is an instance of Teacher
+    #     end
+    #   end
+    #   field :user, :string do
+    #     export_value do
+    #       value.name if value #value is an instance of Teacher
+    #     end
+    #   end
+    #
+    #   field :quantity
+    # end
+
+    update do
+      exclude_fields :created_at
+    end
+    create do
+      exclude_fields :deleted_at, :created_at
+    end
   end
 
   config.model 'Product' do
-    exclude_fields :orders
+    exclude_fields :orders, :original_stock, :created_at, :updated_at
+    field :name
+    field :description , :text do
+      html_attributes do
+        {:rows=> 3, :cols => 50}
+      end
+    end
+    field :price
+    field :in_stock
+    field :deleted_at
+    create do
+      exclude_fields :deleted_at, :in_stock
+    end
+    update do
+      exclude_fields :in_stock
+    end
+    list do
+      exclude_fields :description
+    end
   end
 
   config.actions do

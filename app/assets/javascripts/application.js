@@ -15,5 +15,6 @@
 //= require bootstrap.min
 //= require jqBootstrapValidation
 //= require contact_me
+//= require bootstrap-datepicker
 //= require turbolinks
 //= require_tree .

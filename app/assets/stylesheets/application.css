@@ -12,6 +12,7 @@
  *= require bootstrap.min
  *= require font-awesome.min
  *= require devise_bootstrap_views
+ *= require bootstrap-datepicker3
  *= require agency
  *= require_tree .
  *= require_self
