@@ -84,6 +84,17 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Dealer' do
+
+    field :name
+    field :company
+    field :email
+    field :address
+    field :phone
+    field :website
+    exclude_fields :created_at, :orders
+
+  end
   config.model 'Product' do
     exclude_fields :orders, :original_stock, :created_at, :updated_at
     field :name

@@ -14,6 +14,7 @@ class Ability
         elsif user.manager?
           can :manage, [User, Product, Dealer, Order]  # allow managers to do anything to products and users
           cannot [:delete, :destroy],[User, Product, Dealer, Order]
+          cannot [:edit, :update, :create], User
         elsif user.sales?
           can :update, Product, :hidden => false  # allow sales to only update visible products
         end

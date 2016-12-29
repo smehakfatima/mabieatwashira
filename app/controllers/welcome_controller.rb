@@ -7,11 +7,13 @@ class WelcomeController < ApplicationController
   end
 
   def search
-
-    dt    = params[:date].split(/,/)
-    date  =  dt[2] + '-' + dt[0] + '-' + dt[1]
-    @summary = Order.where(created_at: date)
-
+    if params[:date].present?
+      dt    = params[:date].split(/,/)
+      date  =  dt[2] + '-' + dt[0] + '-' + dt[1]
+      @summary = Order.where(created_at: date)
+    else
+      @summary = Order.all
+    end
   end
 
   def order_summary
