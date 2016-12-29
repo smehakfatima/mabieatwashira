@@ -17,7 +17,7 @@ RailsAdmin.config do |config|
    config.authorize_with :cancan  #TODO add cancancan to rails_admin config
 
   config.navigation_static_links = {
-      'Reports' => 'https://hussaingroups.org/summary'
+      'Reports' => 'www.hussaingroups.org/summary'
   }
 
   ## == Pundit ==
