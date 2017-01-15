@@ -35,7 +35,7 @@ gem "rails_admin"
 gem 'bootstrap-datepicker-rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
-
+gem "paranoia"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

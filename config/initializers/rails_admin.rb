@@ -60,21 +60,6 @@ RailsAdmin.config do |config|
         {:rows=> 3, :cols => 50}
       end
     end
-    # export do
-    #   field :order_type
-    #   field :product , :string do
-    #     export_value do
-    #       value.name if value #value is an instance of Teacher
-    #     end
-    #   end
-    #   field :user, :string do
-    #     export_value do
-    #       value.name if value #value is an instance of Teacher
-    #     end
-    #   end
-    #
-    #   field :quantity
-    # end
 
     update do
       exclude_fields :created_at
@@ -119,11 +104,52 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Brand' do
+    exclude_fields :sim_records
+  end
+
+  config.model 'Employee' do
+    exclude_fields :sim_records
+  end
+
+  config.model 'SimRecord' do
+    field :brand do
+     inline_edit false
+     end
+     field :employee do
+      inline_edit false
+      help 'Assigned To Employee'
+    end
+    field :account_number
+    field :sim_resource_number
+    field :dp_number
+    field :activation_date
+    field :is_delivered
+
+    export do
+      field :brand, :string do
+          export_value do
+            value.name if value #value is an instance of Teacher
+          end
+        end
+      field :employee, :string do
+          export_value do
+            value.name if value #value is an instance of Teacher
+          end
+        end
+        field :created_at
+        field :updated_at
+
+    end
+  end
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
     new
-    export
+    export  do
+      except ['Employee', 'Dealer', 'Brand']
+    end
     #bulk_delete
     show
     edit

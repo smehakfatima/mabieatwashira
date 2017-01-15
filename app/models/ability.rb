@@ -12,7 +12,7 @@ class Ability
         if user.admin?
           can :manage, :all             # allow superadmins to do anything
         elsif user.manager?
-          can :manage, [User, Product, Dealer, Order]  # allow managers to do anything to products and users
+          can :manage, [User, Product, Dealer, Order, Brand, Employee, SimRecord]  # allow managers to do anything to products and users
           cannot [:delete, :destroy],[User, Product, Dealer, Order]
           cannot [:edit, :update, :create], User
         elsif user.sales?
